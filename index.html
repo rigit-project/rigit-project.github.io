@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="RigIt: Precise Interactive Articulation of Objects in Images. Rig a part of a 2D image with a 3D kinematic proxy, articulate it, and a fine-tuned diffusion model synthesizes the photorealistic result.">
+  <meta name="keywords" content="RigIt, articulation, image editing, diffusion, kinematic proxy, oriented bounding box">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RigIt: Precise Interactive Articulation of Objects in Images</title>
+
+  <meta property="og:title" content="RigIt: Precise Interactive Articulation of Objects in Images"/>
+  <meta property="og:description" content="Rig a part of a 2D image with a 3D kinematic proxy, articulate it, and a fine-tuned diffusion model synthesizes the photorealistic result."/>
+  <meta property="og:url" content="https://rigit-project.github.io"/>
+  <meta property="og:image" content="https://rigit-project.github.io/static/images/teaser.png"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="RigIt: Precise Interactive Articulation of Objects in Images"/>
+  <meta name="twitter:image" content="https://rigit-project.github.io/static/images/teaser.png"/>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.4/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">
+            <span class="method-name">RigIt</span>: Precise Interactive Articulation of Objects in Images
+          </h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/ayan-kashyap" target="_blank" rel="noopener">Ayan Kashyap</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://aisagarw.github.io/" target="_blank" rel="noopener">Aishwarya Agarwal</a><sup>1,2</sup>,</span>
+            <span class="author-block">
+              <a href="https://deeptigp.github.io/" target="_blank" rel="noopener">Deepti Ghadiyaram</a><sup>3</sup>,</span>
+            <span class="author-block">
+              <a href="https://vineet-gandhi.github.io/" target="_blank" rel="noopener">Vineet Gandhi</a><sup>1</sup></span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>IIIT Hyderabad,</span>
+            <span class="author-block"><sup>2</sup>Adobe Research,</span>
+            <span class="author-block"><sup>3</sup>Boston University</span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block publication-venue">SIGGRAPH Asia 2026</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- Code (coming soon) -->
+              <span class="link-block">
+                <a class="external-link button is-normal is-rounded is-dark coming-soon"
+                   aria-disabled="true" tabindex="-1">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code<span class="cs-tag">(coming soon)</span></span>
+                </a>
+              </span>
+              <!-- Data (coming soon) -->
+              <span class="link-block">
+                <a class="external-link button is-normal is-rounded is-dark coming-soon"
+                   aria-disabled="true" tabindex="-1">
+                  <span class="icon">
+                    <i class="far fa-images"></i>
+                  </span>
+                  <span>Data<span class="cs-tag">(coming soon)</span></span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="./static/images/teaser.png" class="paper-figure"
+           alt="RigIt teaser: a kitchen scene whose microwave door, oven door and drawers are rigged as 3D boxes, articulated, and re-synthesized; plus in-the-wild results on a trash bin, a wooden cabinet and a car door.">
+      <p class="figure-caption">
+        <strong>Overview of articulation-based image editing with <span class="method-name">RigIt</span>.</strong>
+        Given a source image and a set of user-selected parts to articulate, our method produces a photorealistic
+        edited image with the parts in a target articulation state while preserving identity, appearance, and scene
+        context. <strong>Top:</strong> The user rigs movable parts of an input photograph (a) as 3D kinematic
+        proxies (b), articulates them to the target state (c), and our diffusion model synthesizes the resulting
+        image (d). Here the microwave door, oven door, and drawers are opened simultaneously, with shadows,
+        lighting, and revealed interiors handled automatically. <strong>Bottom:</strong>
+        <span class="method-name">RigIt</span> generalizes to real photographs and to object categories absent from
+        training. Each example shows the wireframe articulation overlaid on the input (left) and the resulting
+        output (right): a trash bin, a wooden cabinet with multi-part motion, and a car door.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Editing articulated objects within a single image requires precise kinematic control&mdash;specifying
+            exactly what moves, along which axis, and by how much. Existing text- and drag-based image editing
+            methods provide only weak or ambiguous control over articulated object structure, often failing to
+            localize the correct movable part or execute precise articulation extents, particularly under occlusion.
+          </p>
+          <p>
+            We propose <span class="method-name">RigIt</span>, a novel framework that enables precise object
+            articulation by directly &ldquo;rigging&rdquo; parts within a 2D image. Our method extracts the
+            underlying geometry of a user-selected part to fit a 3D kinematic proxy, represented as an oriented
+            bounding box (OBB). Users interactively manipulate this explicit 3D handle, which the system projects
+            into a 2D wireframe conditioning signal. A fine-tuned diffusion model then processes this signal, guided
+            by a localized articulation-aware loss, to generate photorealistic edits.
+          </p>
+          <p>
+            Remarkably, despite being trained exclusively on a small synthetic dataset of six categories,
+            <span class="method-name">RigIt</span> generalizes robustly to real-world, in-the-wild images and unseen
+            object classes. Extensive evaluations on both synthetic and real-world benchmarks demonstrate that our
+            approach significantly outperforms state-of-the-art text and drag-based baselines, achieving over 90%
+            user preference for preserving articulation intent and scene consistency.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top: 0;">
+  <div class="container is-max-widescreen">
+    <div class="columns is-centered">
+      <div class="column is-full">
+        <h2 class="title is-3 has-text-centered">Method</h2>
+        <img src="./static/images/pipeline.png" class="paper-figure"
+             alt="RigIt pipeline: image-to-wireframe on the left (SAM3 segmentation, MoGe2 point map, OBB fitting, joint type and axis selection, articulation, wireframe projection) and wireframe-guided diffusion editing on the right (FLUX mmDiT with condition-specific LoRA modules).">
+        <p class="figure-caption">
+          <strong>Left (Image-to-Wireframe).</strong> Given a source image <em>I</em><sub>src</sub>, the user selects
+          which parts to articulate; <strong>&#9312;</strong> SAM3 segments the selected regions and
+          <strong>&#9313;</strong> MoGe2 lifts the image to a metric point map. <strong>&#9314;</strong> For each
+          part, we fit an oriented 3D bounding box that serves as a kinematic proxy. A joint is attached to each
+          proxy by selecting <strong>&#9315;</strong> a type (<em>revolute</em> or <em>prismatic</em>) and
+          <strong>&#9316;</strong> an axis from a small discrete label space, either through a lightweight editor or
+          via a vision&ndash;language model. <strong>&#9317;</strong> The user articulates the proxies to the target
+          state, and we project the source and target proxy edges into the image plane to render the wireframe
+          condition <em>I</em><sub>wire</sub> (insets).
+          <br><br>
+          <strong>Right (Wireframe-Guided Image Editing).</strong> The diffusion model receives
+          <em>I</em><sub>src</sub>, <em>I</em><sub>wire</sub>, noise, and a text prompt as input. The source image
+          and wireframe are encoded as condition tokens, adapted by condition-specific LoRA modules (orange flames),
+          then concatenated with the noisy latent and text tokens and jointly processed by the FLUX mmDiT blocks to
+          synthesize the edited image.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top: 0;">
+  <div class="container is-max-widescreen">
+    <div class="columns is-centered">
+      <div class="column is-full">
+        <h2 class="title is-3 has-text-centered">Results</h2>
+
+        <div class="tabs is-centered results-tabs" id="results-tabs">
+          <ul>
+            <li class="is-active"><a data-panel="panel-text">vs. Text-based</a></li>
+            <li><a data-panel="panel-drag">vs. Drag-based</a></li>
+            <li><a data-panel="panel-cao">CAO Benchmark</a></li>
+            <li><a data-panel="panel-wild">In the Wild</a></li>
+          </ul>
+        </div>
+
+        <div class="results-panel" id="panel-text">
+          <img src="./static/images/results_text.png" class="paper-figure" loading="lazy"
+               alt="Qualitative comparison against text-based baselines on in-the-wild internet images.">
+          <p class="figure-caption">
+            Qualitative comparison against text-based baselines on in-the-wild internet images. For each row, from
+            left to right, we show the original image, articulation wireframe, and results generated by
+            <span class="method-name">RigIt</span>, Nano&nbsp;Banana&nbsp;2, and FLUX&nbsp;Kontext.
+          </p>
+        </div>
+
+        <div class="results-panel" id="panel-drag" hidden>
+          <img src="./static/images/results_drag.png" class="paper-figure" loading="lazy"
+               alt="Qualitative comparison against drag-based baselines on images from the Amazon Berkeley Objects dataset.">
+          <p class="figure-caption">
+            Qualitative comparison against drag-based baselines on images from the Amazon Berkeley Objects dataset.
+            From left to right: input image, articulation wireframe and output produced by
+            <span class="method-name">RigIt</span>, input drag constraints, and outputs from Drag-A-Part and
+            Puppet-Master.
+          </p>
+        </div>
+
+        <div class="results-panel" id="panel-cao" hidden>
+          <img src="./static/images/results_cao.png" class="paper-figure" loading="lazy"
+               alt="Qualitative comparison against Nano Banana 2 on images from the CAO benchmark.">
+          <p class="figure-caption">
+            Qualitative comparison against Nano&nbsp;Banana&nbsp;2 on images from the CAO benchmark. For each row,
+            from left to right, we show the original image, ground-truth image (target pair), articulation
+            wireframe, and results generated by <span class="method-name">RigIt</span> and
+            Nano&nbsp;Banana&nbsp;2.
+          </p>
+        </div>
+
+        <div class="results-panel" id="panel-wild" hidden>
+          <img src="./static/images/results_wild.png" class="paper-figure" loading="lazy"
+               alt="RigIt results on diverse internet images: input with overlaid articulation wireframe next to the edited output.">
+          <p class="figure-caption">
+            Results of <span class="method-name">RigIt</span> on diverse internet images. For each pair, the left
+            image shows the input with the overlaid articulation wireframe, and the right image shows the edited
+            output generated by <span class="method-name">RigIt</span>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p style="text-align: center;">
+            This website is licensed under a
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>. It borrows the
+            <a href="https://github.com/nerfies/nerfies.github.io" target="_blank">source code</a> of the
+            <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page; we thank the authors for
+            open-sourcing it.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="./static/js/index.js"></script>
+
+</body>
+</html>
