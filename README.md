@@ -7,10 +7,14 @@ Source for <https://rigit-project.github.io> — the project page for
 ## Layout
 
 ```
-index.html               page markup (hero, teaser, abstract, method, results)
+index.html               page markup (hero, teaser, abstract, examples, method, results)
 static/css/index.css     Nerfies-derived styles + RigIt additions
 static/js/index.js       tab switching for the results gallery
+static/js/rigit.js       animated Examples tiles + the Method walkthrough (canvas, no dependencies)
+static/js/rigit_data.js  scene data for rigit.js (generated, see below)
 static/images/           figures exported from the paper
+static/images/examples/  input photos + RigIt edits for the Examples strip (generated)
+static/images/walk/      photo, edit and part masks for the walkthrough (generated)
 static/videos/           (empty for now — drop result videos here)
 ```
 
@@ -30,6 +34,17 @@ static/videos/           (empty for now — drop result videos here)
 
 - **Code / Data links.** Both are placeholders. To activate one, remove the `coming-soon`
   class and the `<span class="cs-tag">` from the button in `index.html`, then add the `href`.
+
+- **Examples + walkthrough.** Both are drawn by `static/js/rigit.js`, ported from the SIGGRAPH
+  fast-forward deck. Their data and images are exported from the RigIt repo:
+
+  ```sh
+  python fastforward/build_web_assets.py   # run from the RigIt repo root
+  ```
+
+  The example scenes (`EXAMPLES`) and the walkthrough scene (`WALK_SCENE`) are listed at the top
+  of that script; use Pexels/Unsplash photos only. The walkthrough's point-cloud grid is inlined in
+  `rigit_data.js` as data URIs, so the page also works when `index.html` is opened from disk.
 
 - **New results tab.** Add an `<li>` to `#results-tabs` with `data-panel="panel-x"` and a
   matching `<div class="results-panel" id="panel-x" hidden>`. No JS change needed.

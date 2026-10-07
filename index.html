@@ -36,7 +36,7 @@
           </h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="https://www.linkedin.com/in/ayan-kashyap" target="_blank" rel="noopener">Ayan Kashyap</a><sup>1</sup>,</span>
+              <a href="https://ayankashyap.github.io/" target="_blank" rel="noopener">Ayan Kashyap</a><sup>1</sup>,</span>
             <span class="author-block">
               <a href="https://aisagarw.github.io/" target="_blank" rel="noopener">Aishwarya Agarwal</a><sup>1,2</sup>,</span>
             <span class="author-block">
@@ -140,11 +140,72 @@
 </section>
 
 <section class="section" style="padding-top: 0;">
-  <div class="container is-max-widescreen">
+  <div class="container is-max-wide">
+    <h2 class="title is-3 has-text-centered">Examples</h2>
+    <div class="ex-grid" id="ex-grid"></div>
+    <p class="figure-caption">
+      Real photographs edited with <span class="method-name">RigIt</span>. Each animation first shows the
+      articulation the user specified (the part's 3D proxy, its joint, and the motion extent) and then dissolves
+      into <span class="method-name">RigIt</span>'s output. Photos: Unsplash, Pexels.
+    </p>
+  </div>
+</section>
+
+<section class="section" style="padding-top: 0;">
+  <div class="container is-max-wide">
     <div class="columns is-centered">
       <div class="column is-full">
         <h2 class="title is-3 has-text-centered">Method</h2>
-        <img src="./static/images/pipeline.png" class="paper-figure"
+
+        <div class="columns is-centered">
+          <div class="column is-four-fifths">
+            <div class="content has-text-justified">
+              <p>
+                A precise articulation needs three things: the <strong>part</strong> that moves, its
+                <strong>joint</strong> (how it is allowed to move), and the <strong>motion extent</strong> (how
+                far it moves). <span class="method-name">RigIt</span> captures all three by rigging the part with a
+                3D proxy, then projects the articulated proxy into a 2D wireframe that guides a diffusion model.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="walk">
+          <div class="walk-stage" id="walk-stage">
+            <img class="walk-fallback" src="./static/images/walk/edit.jpg" alt="Edited cabinet: both doors and the drawer are open">
+            <canvas role="img" aria-label="Animated walkthrough: a cabinet photo is segmented into its two doors and drawer, lifted to a 3D point cloud, fitted with 3D boxes, rigged with hinge and slide joints, articulated, projected to a wireframe, and finally edited by the diffusion model."></canvas>
+            <div class="walk-pill" id="walk-pill" aria-hidden="true"></div>
+            <button class="walk-play" id="walk-play" type="button" aria-label="Pause walkthrough"><i class="fas fa-pause"></i></button>
+          </div>
+          <div class="walk-side">
+            <ol class="walk-steps" id="walk-steps">
+              <li><button type="button"><span class="walk-num">1</span><span class="walk-text">
+                <span class="walk-title">Segment parts</span>
+                <span class="walk-desc">The user names the parts to move; SAM3 segments them.</span></span></button></li>
+              <li><button type="button"><span class="walk-num">2</span><span class="walk-text">
+                <span class="walk-title">Lift to 3D</span>
+                <span class="walk-desc">MoGe2 lifts the photo to a metric point map.</span></span></button></li>
+              <li><button type="button"><span class="walk-num">3</span><span class="walk-text">
+                <span class="walk-title">Fit part-level 3D proxies</span>
+                <span class="walk-desc">An oriented 3D bounding box is fitted to each part as its kinematic proxy.</span></span></button></li>
+              <li><button type="button"><span class="walk-num">4</span><span class="walk-text">
+                <span class="walk-title">Select joint type</span>
+                <span class="walk-desc">Each proxy gets a joint: <em>revolute</em> (it rotates) or <em>prismatic</em> (it slides).</span></span></button></li>
+              <li><button type="button"><span class="walk-num">5</span><span class="walk-text">
+                <span class="walk-title">Select articulation axis</span>
+                <span class="walk-desc">The hinge edge or slide direction is picked from a few discrete options, in the editor or by a vision&ndash;language model.</span></span></button></li>
+              <li><button type="button"><span class="walk-num">6</span><span class="walk-text">
+                <span class="walk-title">Articulate and render <em>I</em><sub>wire</sub></span>
+                <span class="walk-desc">The user drags each proxy to its target state. Source (red) and target (green) proxy edges are projected into the wireframe condition.</span></span></button></li>
+              <li class="walk-last"><button type="button"><span class="walk-num"><i class="fas fa-arrow-right"></i></span><span class="walk-text">
+                <span class="walk-title">Wireframe-guided editing</span>
+                <span class="walk-desc">A FLUX model with condition-specific LoRAs takes <em>I</em><sub>src</sub>, <em>I</em><sub>wire</sub>, and a short prompt, and synthesizes the edit.</span></span></button></li>
+            </ol>
+            <p class="walk-hint">Click a step to replay it. Photo: Pexels.</p>
+          </div>
+        </div>
+
+        <img src="./static/images/pipeline.png" class="paper-figure pipeline-figure"
              alt="RigIt pipeline: image-to-wireframe on the left (SAM3 segmentation, MoGe2 point map, OBB fitting, joint type and axis selection, articulation, wireframe projection) and wireframe-guided diffusion editing on the right (FLUX mmDiT with condition-specific LoRA modules).">
         <p class="figure-caption">
           <strong>Left (Image-to-Wireframe).</strong> Given a source image <em>I</em><sub>src</sub>, the user selects
@@ -169,7 +230,7 @@
 </section>
 
 <section class="section" style="padding-top: 0;">
-  <div class="container is-max-widescreen">
+  <div class="container is-max-wide">
     <div class="columns is-centered">
       <div class="column is-full">
         <h2 class="title is-3 has-text-centered">Results</h2>
@@ -249,6 +310,8 @@
 </footer>
 
 <script src="./static/js/index.js"></script>
+<script src="./static/js/rigit_data.js"></script>
+<script src="./static/js/rigit.js"></script>
 
 </body>
 </html>

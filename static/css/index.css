@@ -173,11 +173,256 @@ body {
   font-weight: 400;
 }
 
+/* Shared width for Examples, Method and Results: a little wider than Bulma's widescreen container */
+
+@media screen and (min-width: 1024px) {
+  .section .container.is-max-wide {
+    max-width: 1248px;
+  }
+}
+
+/* Examples strip (filled by rigit.js) */
+
+.ex-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.ex-tile {
+  margin: 0;
+}
+
+.ex-media {
+  position: relative;
+  border: 1px solid #e4e4e4;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #f5f5f5;
+}
+
+.ex-media img,
+.ex-media canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.ex-media .ex-edit {
+  opacity: 0;
+}
+
+.ex-tag {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  padding: 1px 9px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  color: #4a4a4a;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 0.72rem;
+}
+
+.ex-tag.is-edit {
+  color: hsl(204, 86%, 43%);
+  font-variant: small-caps;
+  letter-spacing: 0.01em;
+}
+
+.ex-tile figcaption {
+  margin-top: 0.5rem;
+  text-align: center;
+  font-family: 'Google Sans', sans-serif;
+  line-height: 1.35;
+}
+
+.ex-title {
+  display: block;
+  color: #363636;
+  font-size: 0.95rem;
+}
+
+.ex-meta {
+  display: block;
+  font-size: 0.8rem;
+}
+
+/* Method walkthrough (driven by rigit.js) */
+
+.walk {
+  display: grid;
+  grid-template-columns: minmax(0, 11fr) minmax(0, 9fr);
+  gap: 2.5rem;
+  align-items: center;
+  margin: 0.5rem 0 3rem;
+}
+
+.walk-stage {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border: 1px solid #e4e4e4;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.walk-stage canvas,
+.walk-fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.walk-stage.is-live .walk-fallback {
+  display: none;
+}
+
+.walk-pill {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #4a4a4a;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.walk-pill.on {
+  opacity: 1;
+}
+
+.walk-play {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  color: #4a4a4a;
+  font-size: 0.7rem;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.walk-stage:not(.is-live) .walk-play {
+  display: none;
+}
+
+.walk-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.walk-steps button {
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.5rem 0.4rem;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.walk-steps button:hover {
+  background: #f7f7f7;
+}
+
+.walk-steps button:focus-visible {
+  outline: 2px solid hsl(204, 86%, 53%);
+  outline-offset: 1px;
+}
+
+.walk-num {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  border-radius: 50%;
+  background: #d5d5d5;
+  color: #fff;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 0.78rem;
+  transition: background 0.3s;
+}
+
+.walk-steps li.done .walk-num,
+.walk-steps li.active .walk-num {
+  background: #f38949;
+}
+
+.walk-last .walk-num {
+  font-size: 0.65rem;
+}
+
+.walk-title {
+  display: block;
+  color: #7a7a7a;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 1rem;
+  line-height: 1.35;
+  transition: color 0.3s;
+}
+
+.walk-desc {
+  display: block;
+  margin-top: 0.15rem;
+  color: #a0a0a0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  transition: color 0.3s;
+}
+
+.walk-steps li.active .walk-title {
+  color: #363636;
+}
+
+.walk-steps li.active .walk-desc {
+  color: #4a4a4a;
+}
+
+.walk-hint {
+  margin-top: 0.6rem;
+  padding-left: 0.4rem;
+  color: #a0a0a0;
+  font-size: 0.78rem;
+}
+
+@media screen and (max-width: 900px) {
+  .ex-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media screen and (max-width: 768px) {
   .publication-title {
     font-size: 2.1rem !important;
   }
   .figure-caption {
     text-align: left;
+  }
+  .walk {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+  .walk-steps li:not(.active) .walk-desc {
+    display: none;
   }
 }
