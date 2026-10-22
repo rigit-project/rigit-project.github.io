@@ -13,6 +13,7 @@ static/js/index.js       tab switching for the results gallery
 static/js/rigit.js       animated Examples tiles + the Method walkthrough (canvas, no dependencies)
 static/js/rigit_data.js  scene data for rigit.js (generated, see below)
 static/images/           figures exported from the paper
+static/pdfs/RigIt.pdf    camera-ready paper (saconferencepapers26-216.pdf), linked by the Paper button
 static/images/examples/  input photos + RigIt edits for the Examples strip (generated)
 static/images/walk/      photo, edit and part masks for the walkthrough (generated)
 static/videos/           (empty for now — drop result videos here)
