@@ -33,8 +33,10 @@ static/videos/           (empty for now — drop result videos here)
   `text_baseline_qual.pdf` → `results_text.png`, `drag_baseline_qual.pdf` → `results_drag.png`,
   `real_world_dataset.pdf` → `results_cao.png`, `misc_qual_resized.pdf` → `results_wild.png`.
 
-- **Code / Data links.** Both are placeholders. To activate one, remove the `coming-soon`
-  class and the `<span class="cs-tag">` from the button in `index.html`, then add the `href`.
+- **Links.** The buttons under the authors in `index.html` point to the paper PDF, the code
+  (github.com/rigit-project/RigIT), the checkpoint (huggingface.co/ayankashyap/RigIT-FLUX1-dev-LoRA) and the
+  two datasets (huggingface.co/datasets/ayankashyap/RigIT-Synth, .../RigIT-CAO); the 🤗 buttons use the emoji as
+  their icon, since Font Awesome 5 has no Hugging Face icon.
 
 - **Examples + walkthrough.** Both are drawn by `static/js/rigit.js`, ported from the SIGGRAPH
   fast-forward deck. Their data and images are exported from the RigIt repo:

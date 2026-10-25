@@ -160,19 +160,6 @@ body {
   border: 1px solid #e4e4e4;
 }
 
-.coming-soon {
-  opacity: 0.65;
-  cursor: not-allowed !important;
-  pointer-events: none;
-}
-
-.coming-soon .cs-tag {
-  font-size: 0.72em;
-  opacity: 0.85;
-  margin-left: 0.35em;
-  font-weight: 400;
-}
-
 /* Shared width for Examples, Method and Results: a little wider than Bulma's widescreen container */
 
 @media screen and (min-width: 1024px) {
